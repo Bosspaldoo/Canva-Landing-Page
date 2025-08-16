@@ -765,7 +765,6 @@ function updateStarDisplay() {
   highlightStars(selectedRating);
 }
 
-// Form Submission Handler
 function setupFormSubmission() {
   const reviewForm = document.getElementById('reviewForm');
   if (!reviewForm) return;
@@ -796,9 +795,23 @@ function setupFormSubmission() {
     submitButton.textContent = 'Submitting...';
     submitButton.disabled = true;
     
+    // Show thank you popup after a short delay
     setTimeout(() => {
-      window.location.href = 'thank-you.html';
+      showReviewThankYou();
+      submitButton.textContent = originalText;
+      submitButton.disabled = false;
+      
+      // Optionally reset the form
+      reviewForm.reset();
+      selectedRating = 5;
+      updateStarDisplay();
     }, 1000);
+    
+    // Also submit the form to FormSubmit
+    fetch(reviewForm.action, {
+      method: 'POST',
+      body: new FormData(reviewForm)
+    }).catch(error => console.error('Form submission error:', error));
   });
 }
 
@@ -1014,7 +1027,6 @@ function initAnimations() {
   }, 200);
 }
 
-// Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   console.log('DOM loaded, initializing app');
   
@@ -1047,6 +1059,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 100);
   
   initAnimations();
+  
+  // Check for thank you page
+  checkForThankYou();
 });
 
 // Global functions for inline event handlers
@@ -1106,3 +1121,41 @@ window.changePage = changePage;
                 }
             });
         });
+
+// New Java Code
+// Show thank you popup after review submission
+function showReviewThankYou() {
+  const popup = document.getElementById('reviewThankYouPopup');
+  if (popup) {
+    popup.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Store in session that we've shown the thank you
+    sessionStorage.setItem('reviewSubmitted', 'true');
+  }
+}
+
+function hideReviewThankYou() {
+  const popup = document.getElementById('reviewThankYouPopup');
+  if (popup) {
+    popup.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+// Check URL for thank you page and show popup
+function checkForThankYou() {
+  if (window.location.pathname.includes('thank-you.html')) {
+    showReviewThankYou();
+    
+    // Clean up the URL
+    const cleanUrl = window.location.pathname.replace('thank-you.html', '');
+    window.history.replaceState({}, document.title, cleanUrl);
+  }
+  
+  // Also check session storage in case of page refresh
+  if (sessionStorage.getItem('reviewSubmitted')) {
+    showReviewThankYou();
+    sessionStorage.removeItem('reviewSubmitted');
+  }
+}
