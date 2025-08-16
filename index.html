@@ -282,7 +282,18 @@
             });
           });
         </script>
-
+                
+        <!-- Review Thank You Popup -->
+        <div id="reviewThankYouPopup" class="thank-you-popup hidden">
+          <div class="thank-you-popup__content">
+            <button class="thank-you-popup__close" onclick="hideReviewThankYou()">&times;</button>
+            <div class="thank-you-popup__icon">✓</div>
+            <h3>Thank You for Your Review!</h3>
+            <p>Your review has been submitted and is awaiting approval. Once published, you will receive an email from us.</p>
+            <button class="btn btn--primary" onclick="hideReviewThankYou()">Continue Browsing</button>
+          </div>
+        </div>
+                
         <!-- Social Media Section -->
         <section id="social" class="social-section">
             <div class="container">
