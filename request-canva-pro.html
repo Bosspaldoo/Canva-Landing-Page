@@ -33,6 +33,67 @@
         "url": "https://www.proteamlinks.site/request-canva-pro.html"
     }
     </script>
+    
+    <style>
+        /* Thank You Popup Styles */
+        .thank-you-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .thank-you-popup.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .thank-you-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .thank-you-content h2 {
+            color: #2b5876;
+            margin-bottom: 15px;
+        }
+        
+        .thank-you-content p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .close-popup {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .popup-icon {
+            font-size: 50px;
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -224,5 +285,58 @@
     </footer>
 
     <script src="app.js"></script>
+    <script>
+        // Thank You Popup Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('requestForm');
+            const thankYouPopup = document.getElementById('thankYouPopup');
+            const closePopup = document.getElementById('closePopup');
+            const closePopupBtn = document.getElementById('closePopupBtn');
+            
+            // Check if the form was submitted (from URL parameter)
+            const urlParams = new URLSearchParams(window.location.search);
+            const submitted = urlParams.get('submitted');
+            
+            if (submitted === 'true') {
+                thankYouPopup.classList.add('active');
+            }
+            
+            // Form submission handler
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    // In a real scenario, this would happen after successful submission
+                    // For FormSubmit, we'll use the _next parameter to trigger it
+                    // But we'll also add local storage to show it when returning
+                    localStorage.setItem('formSubmitted', 'true');
+                });
+            }
+            
+            // Close popup handlers
+            if (closePopup) {
+                closePopup.addEventListener('click', function() {
+                    thankYouPopup.classList.remove('active');
+                });
+            }
+            
+            if (closePopupBtn) {
+                closePopupBtn.addEventListener('click', function() {
+                    thankYouPopup.classList.remove('active');
+                });
+            }
+            
+            // Check local storage for form submission
+            if (localStorage.getItem('formSubmitted') {
+                thankYouPopup.classList.add('active');
+                localStorage.removeItem('formSubmitted');
+            }
+            
+            // Close popup when clicking outside
+            thankYouPopup.addEventListener('click', function(e) {
+                if (e.target === thankYouPopup) {
+                    thankYouPopup.classList.remove('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
