@@ -212,62 +212,77 @@
                     <button class="modal__close" onclick="hideReviewForm()">&times;</button>
                 </div>
                 
-                <form id="reviewForm" action="https://formsubmit.co/lasoka2024@gmail.com" method="POST">
-                    <!-- FormSubmit Configuration -->
-                    <input type="hidden" name="_subject" value="New Review Submission - Canva Team Plans">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_next" value="https://www.proteamlinks.site/thank-you.html">
-                    <input type="hidden" name="_template" value="table">
-                    
-                    <div class="form-group">
-                        <label class="form-label">Your Rating</label>
-                        <div class="star-rating" id="starRating">
-                            <input type="hidden" name="rating" id="ratingValue" value="5">
-                            <button type="button" class="star" data-rating="1">★</button>
-                            <button type="button" class="star" data-rating="2">★</button>
-                            <button type="button" class="star" data-rating="3">★</button>
-                            <button type="button" class="star" data-rating="4">★</button>
-                            <button type="button" class="star" data-rating="5">★</button>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="reviewerName">Your Name *</label>
-                        <input type="text" id="reviewerName" name="name" class="form-control" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="reviewerLocation">Location *</label>
-                        <input type="text" id="reviewerLocation" name="location" class="form-control" placeholder="City, Philippines" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="reviewerPlan">Which Plan Did You Use? *</label>
-                        <select id="reviewerPlan" name="plan" class="form-control" required>
-                            <option value="">Select a plan</option>
-                            <option value="1 Month">1 Month Plan</option>
-                            <option value="3 Months">3 Months Plan</option>
-                            <option value="6 Months">6 Months Plan</option>
-                            <option value="12 Months">12 Months Plan</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="reviewText">Your Review *</label>
-                        <textarea id="reviewText" name="review" class="form-control" rows="4" placeholder="Tell us about your experience with our Canva Team plans..." required></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="reviewerEmail">Email *</label>
-                        <input type="email" id="reviewerEmail" name="email" class="form-control" placeholder="your@email.com" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <button type="submit" class="btn btn--primary btn--full-width">Submit Review</button>
-                    </div>
-                </form>
+        <form id="reviewForm" action="https://formsubmit.co/lasoka2024@gmail.com" method="POST">
+            <!-- FormSubmit Configuration -->
+            <input type="hidden" name="_subject" value="New Review Submission - Canva Team Plans">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://www.proteamlinks.site/thank-you.html">
+            <input type="hidden" name="_template" value="table">
+        
+            <div class="form-group">
+                <label class="form-label">Your Rating</label>
+                <div class="star-rating" id="starRating">
+                    <input type="hidden" name="rating" id="ratingValue" value="5">
+                    <button type="button" class="star" data-rating="1">★</button>
+                    <button type="button" class="star" data-rating="2">★</button>
+                    <button type="button" class="star" data-rating="3">★</button>
+                    <button type="button" class="star" data-rating="4">★</button>
+                    <button type="button" class="star" data-rating="5">★</button>
+                </div>
             </div>
-        </div>
+        
+            <div class="form-group">
+                <label class="form-label" for="reviewerName">Your Name *</label>
+                <input type="text" id="reviewerName" name="name" class="form-control" required>
+            </div>
+        
+            <div class="form-group">
+                <label class="form-label" for="reviewerLocation">Location *</label>
+                <input type="text" id="reviewerLocation" name="location" class="form-control" placeholder="City, Philippines" required>
+            </div>
+        
+            <div class="form-group">
+                <label class="form-label" for="reviewerPlan">Which Plan Did You Use? *</label>
+                <select id="reviewerPlan" name="plan" class="form-control" required>
+                    <option value="">Select a plan</option>
+                    <option value="1 Month">1 Month Plan</option>
+                    <option value="3 Months">3 Months Plan</option>
+                    <option value="6 Months">6 Months Plan</option>
+                    <option value="12 Months">12 Months Plan</option>
+                </select>
+            </div>
+        
+            <div class="form-group">
+                <label class="form-label" for="reviewText">Your Review *</label>
+                <textarea id="reviewText" name="review" class="form-control" rows="4" placeholder="Tell us about your experience with our Canva Team plans..." required></textarea>
+            </div>
+        
+            <div class="form-group">
+                <label class="form-label" for="reviewerEmail">Email *</label>
+                <input type="email" id="reviewerEmail" name="email" class="form-control" placeholder="your@email.com" required>
+            </div>
+        
+            <div class="form-group">
+                <button type="submit" class="btn btn--primary btn--full-width">Submit Review</button>
+            </div>
+        </form>
+        
+        <!-- Star rating script -->
+        <script>
+          document.querySelectorAll('#starRating .star').forEach(star => {
+            star.addEventListener('click', function() {
+              let rating = this.getAttribute('data-rating');
+              document.getElementById('ratingValue').value = rating;
+              // reset all stars
+              document.querySelectorAll('#starRating .star').forEach(s => s.style.color = "#ccc");
+              // highlight selected stars
+              for (let i = 0; i < rating; i++) {
+                document.querySelectorAll('#starRating .star')[i].style.color = "gold";
+              }
+            });
+          });
+        </script>
+
 
         <!-- Social Media Section -->
         <section id="social" class="social-section">
