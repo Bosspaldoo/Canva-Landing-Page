@@ -1,0 +1,119 @@
+/* Request Form Specific Styles */
+.request-form-section {
+    padding: var(--space-32) 0;
+    background: var(--color-bg-2);
+}
+
+.request-form-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.request-form.card {
+    border: 2px solid var(--color-card-border);
+    box-shadow: var(--shadow-lg);
+}
+
+.request-form .form-group {
+    margin-bottom: var(--space-20);
+}
+
+.request-form .form-label {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    margin-bottom: var(--space-8);
+    font-size: var(--font-size-base);
+}
+
+.request-form .form-control {
+    padding: var(--space-12) var(--space-16);
+    font-size: var(--font-size-base);
+    border-radius: var(--radius-base);
+    border: 2px solid var(--color-border);
+    transition: border-color var(--duration-fast) var(--ease-standard), 
+                box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.request-form .form-control:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+.request-form textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+    font-family: var(--font-family-base);
+}
+
+.request-submit-btn {
+    margin-top: var(--space-16);
+    font-size: var(--font-size-lg);
+    padding: var(--space-16) var(--space-24);
+}
+
+.request-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Announcement Bar Styles (if not already in your CSS) */
+.announcement-bar {
+    width: 100%;
+    background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%);
+    color: #18181b;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    overflow: hidden;
+    position: relative;
+    z-index: 7;
+}
+
+.announcement-content {
+    display: inline-block;
+    white-space: nowrap;
+    padding: 12px 0;
+    animation: announcement-move 15s linear infinite;
+}
+
+@keyframes announcement-move {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Mobile Responsive for Request Form */
+@media (max-width: 768px) {
+    .request-form-container {
+        margin: 0 var(--space-16);
+    }
+    
+    .request-form.card .card__body {
+        padding: var(--space-24);
+    }
+    
+    .hero__content h1 {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .hero__subtitle {
+        font-size: var(--font-size-lg);
+    }
+}
+
+@media (max-width: 480px) {
+    .request-form.card .card__body {
+        padding: var(--space-20);
+    }
+    
+    .announcement-bar {
+        font-size: 0.85rem;
+    }
+    
+    .announcement-content {
+        padding: 10px 0;
+    }
+}

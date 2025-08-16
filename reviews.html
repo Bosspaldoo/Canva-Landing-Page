@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reviews - Canva Team Plans Philippines</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Remove page-view class since we're not using SPA anymore -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__brand">
+                <h2>Canva Team Plans</h2>
+            </div>
+            <ul class="nav__menu">
+                <li><a href="index.html">← Back to Home</a></li>
+                <li><a href="request-canva-pro.html">Request Canva Pro</a></li>
+                <li><button class="btn btn--sm btn--primary" onclick="showReviewForm()">Write a Review</button></li>
+            </ul>
+            <button class="nav__toggle" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+        <div class="announcement-bar">
+  <div class="announcement-track">
+    <div class="announcement-content">
+      🎁 <strong>Giveaways are OPEN!</strong> Join now for a chance to win Canva Team access – follow us on Telegram & YouTube for more info!
+    </div>
+    <div class="announcement-content">
+      🎁 <strong>Giveaways are OPEN!</strong> Join now for a chance to win Canva Team access – follow us on Telegram & YouTube for more info!
+    </div>
+  </div>
+    </header>
+
+    <main class="reviews-page-main">
+        <section class="reviews-page-hero">
+            <div class="container">
+                <h1>Customer Reviews</h1>
+                <div class="reviews-page-summary">
+                    <div class="reviews-summary-large">
+                        <div class="rating-big">
+                            <span class="rating-score-big">4.8</span>
+                            <div class="rating-stars-big">★★★★★</div>
+                            <p>Based on 247 reviews</p>
+                        </div>
+                        <div class="rating-breakdown" id="reviewsBreakdown">
+                            <!-- Will be filled by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reviews-page-content">
+            <div class="container">
+                <div class="reviews-filters">
+                    <div class="filter-group">
+                        <label for="filterRating">Filter by Rating:</label>
+                        <select id="filterRating" class="form-control">
+                            <option value="all">All Ratings</option>
+                            <option value="5">5 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="3">3 Stars</option>
+                            <option value="2">2 Stars</option>
+                            <option value="1">1 Star</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="filterPlan">Filter by Plan:</label>
+                        <select id="filterPlan" class="form-control">
+                            <option value="all">All Plans</option>
+                            <option value="1 Month">1 Month</option>
+                            <option value="3 Months">3 Months</option>
+                            <option value="6 Months">6 Months</option>
+                            <option value="12 Months">12 Months</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <input type="text" id="searchReviews" class="form-control" placeholder="Search reviews...">
+                    </div>
+                </div>
+                
+                <div class="reviews-all-grid" id="allReviewsGrid">
+                    <!-- Will be filled by JavaScript -->
+                </div>
+                
+                <div class="reviews-pagination" id="reviewsPagination">
+                    <!-- Will be filled by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <h3><strong>Canva Team Plans Philippines</strong></h3>
+                    <p><strong>Affordable Canva Pro subscriptions for businesses and individuals in the Philippines.</strong></p>
+                </div>
+                <div class="footer__links">
+                    <div class="footer__column">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html"><strong>Home</strong></a></li>
+                            <li><a href="#plans"><strong>Plans</strong></a></li>
+                            <li><a href="#reviews"><strong>Reviews</strong></a></li>
+                            <li><a href="reviews.html"><strong>All Reviews</strong></a></li>
+                            <li><a href="#features"><strong>Features</strong></a></li>
+                            <li><a href="#faq"><strong>FAQ</strong></a></li>
+                            <li><a href="#contact"><strong>Contact</strong></a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__column">
+                        <h4>Contact Info</h4>
+                        <ul>
+                            <li><a href=""><strong>📧 vwirvo.freeservices@gmail.com</strong></a></li>
+                            <li><a href="https://g.page/r/CRTJhBPss12KEBM/review" target="_blank"> 📍<strong>Grande, Dagupan City, 2400 Pangasinan<br>Philippines</strong></a></li>
+                            <li>📱 Telegram: @canvateamplans</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                                <p><strong>&copy; 2025 Canva Team Plans Philippines. All rights reserved.</strong></p>
+                <p><strong>This is an independent service provider and not affiliated with Canva Pty Ltd.</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Review Form Modal -->
+    <div id="reviewModal" class="modal hidden">
+        <div class="modal__overlay" onclick="hideReviewForm()"></div>
+        <div class="modal__content">
+            <!-- ... keep your existing modal content ... -->
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
