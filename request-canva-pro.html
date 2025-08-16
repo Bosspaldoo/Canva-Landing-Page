@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -33,8 +33,7 @@
         "url": "https://www.proteamlinks.site/request-canva-pro.html"
     }
     </script>
-    
-    <style>
+        <style>
         /* Thank You Popup Styles */
         .thank-you-popup {
             position: fixed;
@@ -145,12 +144,12 @@
 
                 <div class="request-form-container">
                     <!-- FormSubmit Form -->
-                    <form id="requestForm" action="https://formsubmit.co/ea9e4c42f1987f690b778a7ec96e937a" method="POST" class="request-form card">
+                    <form action="https://formsubmit.co/ea9e4c42f1987f690b778a7ec96e937a" method="POST" class="request-form card">
                         <div class="card__body">
                             <!-- FormSubmit Configuration -->
                             <input type="hidden" name="_subject" value="New Canva Pro Premium Account Request">
                             <input type="hidden" name="_captcha" value="false">
-                            <input type="hidden" name="_next" value="https://www.proteamlinks.site/request-canva-pro.html">
+                            <input type="hidden" name="_next" value="https://www.proteamlinks.site/thank-you.html">
                             
                             <div class="form-group">
                                 <label for="email" class="form-label">Active Email Address: <span style="color: var(--color-error);">*</span></label>
@@ -235,18 +234,6 @@
         </section>
     </main>
 
-    <!-- Thank You Popup -->
-    <div class="thank-you-popup" id="thankYouPopup">
-        <div class="thank-you-content">
-            <span class="close-popup" id="closePopup">&times;</span>
-            <div class="popup-icon">✓</div>
-            <h2>Thank You!</h2>
-            <p>Your request has been submitted successfully. Once it's reviewed, you will receive an email invitation from us.</p>
-            <p>Please check your inbox (and spam folder) within 24 hours for our response.</p>
-            <button class="btn btn--primary" id="closePopupBtn">OK</button>
-        </div>
-    </div>
-
     <footer class="footer">
         <div class="container">
             <div class="footer__content">
@@ -285,7 +272,7 @@
     </footer>
 
     <script src="app.js"></script>
-    <script>
+        <script>
         // Thank You Popup Functionality
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('requestForm');
