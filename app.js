@@ -1159,3 +1159,5 @@ function checkForThankYou() {
     sessionStorage.removeItem('reviewSubmitted');
   }
 }
+window.showReviewThankYou = showReviewThankYou;
+window.hideReviewThankYou = hideReviewThankYou;
