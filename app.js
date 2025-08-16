@@ -769,14 +769,15 @@ function updateStarDisplay() {
 function setupFormSubmission() {
   const reviewForm = document.getElementById('reviewForm');
   if (!reviewForm) return;
-  
-  reviewForm.addEventListener('submit', (e) => {
+
+  reviewForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     console.log('Form submission started');
-    
+
+    // Validate required fields
     const requiredFields = reviewForm.querySelectorAll('[required]');
     let isValid = true;
-    
+
     requiredFields.forEach(field => {
       if (!field.value.trim()) {
         isValid = false;
@@ -785,22 +786,66 @@ function setupFormSubmission() {
         field.style.borderColor = 'var(--color-border)';
       }
     });
-    
+
     if (!isValid) {
       alert('Please fill in all required fields.');
       return;
     }
-    
+
     const submitButton = reviewForm.querySelector('button[type="submit"]');
-    const originalText = submitButton.textContent;
     submitButton.textContent = 'Submitting...';
     submitButton.disabled = true;
-    
-    setTimeout(() => {
-      window.location.href = 'thank-you.html';
-    }, 1000);
+
+    // Collect form data
+    const formData = new FormData(reviewForm);
+
+    try {
+      // Send to FormSubmit
+      await fetch(reviewForm.action, {
+        method: "POST",
+        body: formData,
+      });
+
+      // Show popup message
+      showPopupMessage("✅ Your review has been submitted successfully. We appreciate your feedback and will review it shortly.");
+
+      // Reset form
+      reviewForm.reset();
+
+    } catch (error) {
+      showPopupMessage("❌ Something went wrong. Please try again later.");
+    } finally {
+      submitButton.textContent = 'Submit Review';
+      submitButton.disabled = false;
+    }
   });
 }
+
+// Helper: show popup message
+function showPopupMessage(message) {
+  let popup = document.createElement("div");
+  popup.textContent = message;
+  popup.style.position = "fixed";
+  popup.style.bottom = "20px";
+  popup.style.right = "20px";
+  popup.style.background = "#4caf50";
+  popup.style.color = "#fff";
+  popup.style.padding = "15px 20px";
+  popup.style.borderRadius = "8px";
+  popup.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
+  popup.style.zIndex = "9999";
+  popup.style.fontSize = "14px";
+  popup.style.maxWidth = "280px";
+
+  document.body.appendChild(popup);
+
+  setTimeout(() => {
+    popup.style.opacity = "0";
+    popup.style.transition = "opacity 0.5s ease";
+    setTimeout(() => popup.remove(), 500);
+  }, 4000);
+}
+
 
 // Social media section generation
 function generateSocialSection() {
