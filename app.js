@@ -795,9 +795,25 @@ function setupFormSubmission() {
     submitButton.textContent = 'Submitting...';
     submitButton.disabled = true;
     
-    // Show thank you popup after a short delay
-    setTimeout(() => {
-      showReviewThankYou();
+    // Show thank you popup immediately
+    showReviewThankYou();
+    
+    // Submit the form to FormSubmit
+    fetch(reviewForm.action, {
+      method: 'POST',
+      body: new FormData(reviewForm)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response;
+    })
+    .catch(error => {
+      console.error('Form submission error:', error);
+      // Even if there's an error, we'll keep the thank you popup shown
+    })
+    .finally(() => {
       submitButton.textContent = originalText;
       submitButton.disabled = false;
       
@@ -805,13 +821,7 @@ function setupFormSubmission() {
       reviewForm.reset();
       selectedRating = 5;
       updateStarDisplay();
-    }, 1000);
-    
-    // Also submit the form to FormSubmit
-    fetch(reviewForm.action, {
-      method: 'POST',
-      body: new FormData(reviewForm)
-    }).catch(error => console.error('Form submission error:', error));
+    });
   });
 }
 
@@ -1127,11 +1137,9 @@ window.changePage = changePage;
 function showReviewThankYou() {
   const popup = document.getElementById('reviewThankYouPopup');
   if (popup) {
+    popup.classList.remove('hidden');
     popup.classList.add('active');
     document.body.style.overflow = 'hidden';
-    
-    // Store in session that we've shown the thank you
-    sessionStorage.setItem('reviewSubmitted', 'true');
   }
 }
 
@@ -1139,9 +1147,14 @@ function hideReviewThankYou() {
   const popup = document.getElementById('reviewThankYouPopup');
   if (popup) {
     popup.classList.remove('active');
+    popup.classList.add('hidden');
     document.body.style.overflow = '';
   }
 }
+
+// Make these functions available globally
+window.showReviewThankYou = showReviewThankYou;
+window.hideReviewThankYou = hideReviewThankYou;
 
 // Check URL for thank you page and show popup
 function checkForThankYou() {
@@ -1159,5 +1172,3 @@ function checkForThankYou() {
     sessionStorage.removeItem('reviewSubmitted');
   }
 }
-window.showReviewThankYou = showReviewThankYou;
-window.hideReviewThankYou = hideReviewThankYou;
