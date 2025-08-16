@@ -150,7 +150,7 @@
                             <!-- FormSubmit Configuration -->
                             <input type="hidden" name="_subject" value="New Canva Pro Premium Account Request">
                             <input type="hidden" name="_captcha" value="false">
-                            <input type="hidden" name="_next" value="https://www.proteamlinks.site/request-canva-pro.html">
+                            <input type="hidden" name="_next" value="https://www.proteamlinks.site/request-canva-pro.html?submitted=true">
                             
                             <div class="form-group">
                                 <label for="email" class="form-label">Active Email Address: <span style="color: var(--color-error);">*</span></label>
@@ -325,7 +325,7 @@
             }
             
             // Check local storage for form submission
-            if (localStorage.getItem('formSubmitted') {
+            if (localStorage.getItem('formSubmitted')) {
                 thankYouPopup.classList.add('active');
                 localStorage.removeItem('formSubmitted');
             }
@@ -340,3 +340,4 @@
     </script>
 </body>
 </html>
+
