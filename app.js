@@ -773,6 +773,7 @@ function setupFormSubmission() {
     e.preventDefault();
     console.log('Form submission started');
     
+    // Validate required fields
     const requiredFields = reviewForm.querySelectorAll('[required]');
     let isValid = true;
     
@@ -803,11 +804,14 @@ function setupFormSubmission() {
       });
       
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Form submission failed');
       }
       
-      // Only show thank you popup if submission was successful
+      // Show thank you popup for successful submission
       showReviewThankYou();
+      
+      // Store in session that we've shown the thank you
+      sessionStorage.setItem('reviewSubmitted', 'true');
       
       // Reset the form
       reviewForm.reset();
@@ -1069,7 +1073,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   initAnimations();
   
-  // Check for thank you page
+  // Check for thank you page (this should be last)
   checkForThankYou();
 });
 
@@ -1132,16 +1136,24 @@ window.changePage = changePage;
         });
 
 // New Java Code
-// Show thank you popup after review submission
+// Show thank you popup
 function showReviewThankYou() {
   const popup = document.getElementById('reviewThankYouPopup');
   if (popup) {
     popup.classList.remove('hidden');
     popup.classList.add('active');
     document.body.style.overflow = 'hidden';
+    
+    // Close popup when clicking outside
+    popup.addEventListener('click', function(e) {
+      if (e.target === popup) {
+        hideReviewThankYou();
+      }
+    });
   }
 }
 
+// Hide thank you popup
 function hideReviewThankYou() {
   const popup = document.getElementById('reviewThankYouPopup');
   if (popup) {
@@ -1163,13 +1175,16 @@ function checkForThankYou() {
   if (submitted === 'true') {
     showReviewThankYou();
     
-    // Clean up the URL
+    // Clean up the URL without reloading
     const cleanUrl = window.location.pathname;
     window.history.replaceState({}, document.title, cleanUrl);
+    
+    // Store in session that we've shown the thank you
+    sessionStorage.setItem('reviewSubmitted', 'true');
   }
   
   // Also check session storage in case of page refresh
-  if (sessionStorage.getItem('reviewSubmitted')) {
+  if (sessionStorage.getItem('reviewSubmitted') && !document.getElementById('reviewThankYouPopup').classList.contains('active')) {
     showReviewThankYou();
     sessionStorage.removeItem('reviewSubmitted');
   }
