@@ -1157,11 +1157,14 @@ window.hideReviewThankYou = hideReviewThankYou;
 
 // Check URL for thank you page and show popup
 function checkForThankYou() {
-  if (window.location.pathname.includes('thank-you.html')) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const submitted = urlParams.get('submitted');
+  
+  if (submitted === 'true') {
     showReviewThankYou();
     
     // Clean up the URL
-    const cleanUrl = window.location.pathname.replace('thank-you.html', '');
+    const cleanUrl = window.location.pathname;
     window.history.replaceState({}, document.title, cleanUrl);
   }
   
