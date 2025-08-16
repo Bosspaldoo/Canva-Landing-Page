@@ -769,7 +769,7 @@ function setupFormSubmission() {
   const reviewForm = document.getElementById('reviewForm');
   if (!reviewForm) return;
   
-  reviewForm.addEventListener('submit', (e) => {
+  reviewForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     console.log('Form submission started');
     
@@ -795,33 +795,32 @@ function setupFormSubmission() {
     submitButton.textContent = 'Submitting...';
     submitButton.disabled = true;
     
-    // Show thank you popup immediately
-    showReviewThankYou();
-    
-    // Submit the form to FormSubmit
-    fetch(reviewForm.action, {
-      method: 'POST',
-      body: new FormData(reviewForm)
-    })
-    .then(response => {
+    try {
+      // Submit the form to FormSubmit
+      const response = await fetch(reviewForm.action, {
+        method: 'POST',
+        body: new FormData(reviewForm)
+      });
+      
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      return response;
-    })
-    .catch(error => {
-      console.error('Form submission error:', error);
-      // Even if there's an error, we'll keep the thank you popup shown
-    })
-    .finally(() => {
-      submitButton.textContent = originalText;
-      submitButton.disabled = false;
       
-      // Optionally reset the form
+      // Only show thank you popup if submission was successful
+      showReviewThankYou();
+      
+      // Reset the form
       reviewForm.reset();
       selectedRating = 5;
       updateStarDisplay();
-    });
+      
+    } catch (error) {
+      console.error('Form submission error:', error);
+      alert('There was an error submitting your review. Please try again.');
+    } finally {
+      submitButton.textContent = originalText;
+      submitButton.disabled = false;
+    }
   });
 }
 
